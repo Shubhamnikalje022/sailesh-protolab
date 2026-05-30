@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Sailesh ProtoLab - 3D Printing, CAD Design & Prototyping in Nagpur"/>
+  <title>Sailesh ProtoLab | Engineering The Future</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  
+  <style>
+    :root { --primary: #1e90ff; }
+    *{ margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    body{
+      background:#0b0f17;
+      color:white;
+      line-height:1.6;
+    }
+
+    header{
+      position:fixed;
+      width:100%;
+      top:0;
+      background:rgba(11,15,23,0.98);
+      backdrop-filter:blur(12px);
+      padding:16px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+      transition: all 0.4s ease;
+    }
+
+    .logo{ font-size:32px; font-weight:800; color:var(--primary); }
+    .logo span{ color:white; }
+
+    .nav-links{
+      display:flex;
+      gap:30px;
+    }
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      font-weight:500;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .nav-links a:hover,
+    .nav-links a.active{
+      color:var(--primary);
+    }
+    .nav-links a.active:after{
+      content: '';
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--primary);
+    }
+
+    .hamburger {
+      display: none;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .hero{
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)), 
+      url('https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=1400&auto=format&fit=crop') center/cover;
+    }
+    .hero-content{
+      animation: fadeInUp 1.2s ease forwards;
+    }
+    .hero-content h1{
+      font-size:4.2rem;
+      margin-bottom:20px;
+    }
+    .hero-content h1 span{ color:var(--primary); }
+
+    .btn{
+      padding:12px 28px;
+      background:var(--primary);
+      color:white;
+      text-decoration:none;
+      border-radius:50px;
+      font-weight:600;
+      font-size:15px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      display:inline-block;
+    }
+    .btn:hover{
+      background:white;
+      color:var(--primary);
+      transform:translateY(-6px) scale(1.05);
+    }
+
+    section{ 
+      padding:110px 8%; 
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.9s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    section.visible{
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-title h2{
+      font-size:42px;
+      color:var(--primary);
+      text-align:center;
+      margin-bottom:20px;
+    }
+
+    /* Services & Pricing */
+    .services, .pricing{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:30px;
+    }
+    .service-box, .price-card{
+      background:#121826;
+      padding:35px 25px;
+      border-radius:20px;
+      text-align:center;
+      transition: all 0.5s ease;
+    }
+    .service-box:hover, .price-card:hover{
+      transform:translateY(-15px) scale(1.03);
+    }
+
+    /* Why Choose Us */
+    .why-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
+      gap:25px;
+    }
+    .why-card{
+      background:#121826;
+      padding:30px;
+      border-radius:20px;
+      text-align:center;
+    }
+
+    /* Testimonials */
+    .testimonials{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
+      gap:30px;
+    }
+    .testimonial{
+      background:#121826;
+      padding:30px;
+      border-radius:20px;
+      border-left:5px solid var(--primary);
+    }
+
+    .gallery{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      gap:25px;
+    }
+    .gallery img{
+      width:100%;
+      border-radius:20px;
+      transition: all 0.5s ease;
+    }
+    .gallery img:hover{ transform:scale(1.08); }
+
+    .contact-form{
+      max-width:600px;
+      margin:0 auto;
+      background:#121826;
+      padding:40px;
+      border-radius:20px;
+    }
+
+    .whatsapp-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #25D366;
+      color: white;
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      box-shadow: 0 8px 25px rgba(37,211,102,0.5);
+      z-index: 9999;
+      transition: all 0.3s ease;
+    }
+    .whatsapp-btn:hover { transform: scale(1.15); }
+
+    @keyframes fadeInUp {
+      from { opacity:0; transform:translateY(60px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    @media(max-width:768px){
+      .hamburger { display: block; }
+      .nav-links{
+        position: fixed;
+        top: 75px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 75px);
+        background:#0b0f17;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 35px;
+        transition: 0.5s ease;
+      }
+      .nav-links.active{ left: 0; }
+      .hero-content h1{ font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Sailesh <span>ProtoLab</span></div>
+    <div class="nav-links" id="navLinks">
+      <a href="#home" class="nav-link">Home</a>
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="#why" class="nav-link">Why Us</a>
+      <a href="#about" class="nav-link">About</a>
+      <a href="#portfolio" class="nav-link">Portfolio</a>
+      <a href="#testimonials" class="nav-link">Testimonials</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    <div class="hamburger" id="hamburger">☰</div>
+  </header>
+
+  <!-- HERO -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h1>Engineering The <span>Future</span></h1>
+      <p>3D Printing • CAD Design • Rapid Prototyping • Product Development</p>
+      <a href="#services" class="btn">Explore Services</a>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-title"><h2>Our Services</h2></div>
+    <div class="services">
+      <div class="service-box"><h3>3D Printing</h3><p>High quality FDM & SLA printing</p></div>
+      <div class="service-box"><h3>CAD Design</h3><p>Professional 3D modeling</p></div>
+      <div class="service-box"><h3>Rapid Prototyping</h3><p>Fast functional prototypes</p></div>
+      <div class="service-box"><h3>Product Development</h3><p>End-to-end solutions</p></div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section id="pricing">
+    <div class="section-title"><h2>Pricing</h2></div>
+    <div class="pricing">
+      <div class="price-card">
+        <h3>Starter</h3>
+        <h2>₹4,999</h2>
+        <p>Simple parts • Up to 100g • 4-6 days</p>
+        <a href="#contact" class="btn">Select Plan</a>
+      </div>
+      <div class="price-card">
+        <h3>Standard</h3>
+        <h2>₹12,999</h2>
+        <p>Medium complexity • Assembly • 8-12 days</p>
+        <a href="#contact" class="btn">Select Plan</a>
+      </div>
+      <div class="price-card">
+        <h3>Premium</h3>
+        <h2>₹25,000+</h2>
+        <p>Complex projects • Multiple revisions</p>
+        <a href="#contact" class="btn">Get Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section id="why">
+    <div class="section-title"><h2>Why Choose Us</h2></div>
+    <div class="why-grid">
+      <div class="why-card">
+        <h3>⚡ Fast Delivery</h3>
+        <p>Quick turnaround from idea to prototype</p>
+      </div>
+      <div class="why-card">
+        <h3>🔧 High Precision</h3>
+        <p>Advanced machines & expert engineers</p>
+      </div>
+      <div class="why-card">
+        <h3>💡 Innovative Solutions</h3>
+        <p>Creative designs that work in real world</p>
+      </div>
+      <div class="why-card">
+        <h3>🤝 Full Support</h3>
+        <p>From concept to final product</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-title"><h2>About Us</h2></div>
+    <div class="about-content">
+      <img src="https://images.unsplash.com/photo-1537462715879-360eeb61a0ad?q=80&w=1200&auto=format&fit=crop" alt="Workshop">
+      <div class="about-text">
+        <p><strong>Sailesh ProtoLab</strong> is an innovative engineering and product development company specializing in 3D printing, CAD design, rapid prototyping, and custom product solutions.</p>
+        <br>
+        <p>We transform ideas into high-quality functional prototypes using advanced technology, precision engineering, and creative design.</p>
+        <br>
+        <p><strong>Our mission</strong> is to deliver smart, reliable, and future-ready solutions for industries, startups, and innovators.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="section-title"><h2>What Clients Say</h2></div>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>"Excellent quality and super fast delivery. Highly recommended for prototyping!"</p>
+        <br><strong>— Rohan Sharma, AeroTech</strong>
+      </div>
+      <div class="testimonial">
+        <p>"Best CAD service in Chhatrapati Sambhajinagar. Very professional team and great communication."</p>
+        <br><strong>— Priya Deshmukh, Designer</strong>
+      </div>
+      <div class="testimonial">
+        <p>"Helped us bring our product from idea to reality in record time."</p>
+        <br><strong>— Amit Patil, Mech Innovations</strong>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section id="portfolio">
+    <div class="section-title"><h2>Portfolio</h2></div>
+    <div class="gallery">
+      <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?q=80&w=1000" alt="Project 2">
+      <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000" alt="Project 3">
+      <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=1000" alt="Project 4">
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-title"><h2>Contact Us</h2></div>
+    <div class="contact-form">
+      <form id="contactForm">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="tel" placeholder="Phone">
+        <textarea rows="5" placeholder="Your Project Details"></textarea>
+        <button type="submit" class="btn" style="width:100%">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-btn">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <footer style="text-align:center; padding:50px; background:#05070d;">
+    © 2026 Sailesh ProtoLab | Chhatrapati Sambhajinagar, Maharashtra, India
+  </footer>
+
+  <script>
+    // Mobile Menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+
+    // Active Nav on Scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      document.querySelectorAll('section').forEach(section => {
+        if (scrollY >= section.offsetTop - 200) {
+          current = section.getAttribute('id');
+        }
+      });
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) link.classList.add('active');
+      });
+    });
+
+    // Scroll Reveal Animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('section').forEach(sec => observer.observe(sec));
+
+    // Form
+    document.getElementById('contactForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert("✅ Thank you! Your message has been received.");
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
